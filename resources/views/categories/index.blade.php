@@ -3,7 +3,10 @@
 @section('title', 'Категории')
 
 @section('body')
-    <a href="/categories/create">Add</a>
+    <h1>Categories</h1>
+
+    <a class="btn btn-primary" href="/categories/create" role="button">Add</a>
+
     <table class="table">
         <thead>
         <tr>
@@ -15,15 +18,17 @@
         </thead>
         <tbody>
         @foreach($categories as $category)
-        <tr>
-            <th scope="row">{{ $category->id }}</th>
-            <td>{{ $category->title }}</td>
-            <td>{{ $category->slug }}</td>
-            <td>
-                <a href="/categories/update/{{ $category->id }}">Edit</a> |
-                <a href="/categories/delete/{{ $category->id }}">Delete</a>
-            </td>
-        </tr>
+            @if($category->title !== 'Uncategorized')
+                <tr>
+                    <th scope="row">{{ $category->id }}</th>
+                    <td>{{ $category->title }}</td>
+                    <td>{{ $category->slug }}</td>
+                    <td>
+                        <a href="/categories/update/{{ $category->id }}">Edit</a> |
+                        <a href="/categories/delete/{{ $category->id }}">Delete</a>
+                    </td>
+                </tr>
+            @endif
         @endforeach
         </tbody>
     </table>

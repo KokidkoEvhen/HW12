@@ -26,7 +26,7 @@ class CategoryController
                     'slug' => $request->get('slug'),
                 ]);
             } else {
-                $category = Category::find($_POST['id']);
+                $category = Category::find($request->route()->parameter('id'));
                 $category->update([
                     'title' => $request->get('title'),
                     'slug' => $request->get('slug'),
