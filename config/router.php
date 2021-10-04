@@ -4,6 +4,7 @@ use Illuminate\Events\Dispatcher;
 use Hillel\Controllers\MainController;
 use \Hillel\Controllers\CategoryController;
 use Hillel\Controllers\PostController;
+use Hillel\Controllers\TagController;
 
 
 $request = \Illuminate\Http\Request::createFromGlobals();
@@ -35,11 +36,20 @@ $router->prefix('categories')->group(function($router){
 
 $router->prefix('posts')->group(function($router){
     $router->get('/', [PostController::class, 'index']);
-    $router->get('/form', [PostController::class, 'addForm']);
+    $router->get('/form', [PostController::class, 'form']);
     $router->post('/form', [PostController::class, 'create']);
-    $router->get('/form/{id}', [PostController::class, 'editForm']);
+    $router->get('/form/{id}', [PostController::class, 'form']);
     $router->post('/form/{id}', [PostController::class, 'update']);
     $router->get('/delete/{id}', [PostController::class, 'delete']);
+});
+
+$router->prefix('tags')->group(function($router){
+    $router->get('/', [TagController::class, 'index']);
+    $router->get('/form', [TagController::class, 'form']);
+    $router->post('/form', [TagController::class, 'create']);
+    $router->get('/form/{id}', [TagController::class, 'form']);
+    $router->post('/form/{id}', [TagController::class, 'update']);
+    $router->get('/delete/{id}', [TagController::class, 'delete']);
 });
 
 

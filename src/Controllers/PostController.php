@@ -15,15 +15,14 @@ class PostController
         return view('posts.index', ['posts' => $posts]);
     }
 
-    public function addForm()
+    public function form()
     {
-        $request = request();
         $data = [];
         $data['tags'] = Tag::all();
         $data['categories'] = Category::all();
 
-        if (!empty($id = $request->route()->parameter('id'))) {
-            $data['post'] = Post::find($id);
+        if (!empty($id = request()->route()->parameter('id'))) {
+            $data['post'] = Post::with('tags')->find($id);
         }
 
         return view('posts.form', $data);
@@ -42,15 +41,6 @@ class PostController
         $post->tags()->sync($request->get('tags_id'));
 
         header('Location: /posts');
-    }
-
-    public function editForm()
-    {
-        $data['tags'] = Tag::all();
-        $data['categories'] = Category::all();
-        $data['post'] = Post::with('tags')->find(request()->route()->parameter('id'));
-
-        return view('posts.form', $data);
     }
 
     public function update()

@@ -5,7 +5,7 @@
 @section('body')
     <h1>Tags</h1>
 
-    <a class="btn btn-primary" href="form.php" role="button">Add</a>
+    <a class="btn btn-primary" href="/tags/form" role="button">Add</a>
 
     <table class="table">
         <thead>
@@ -23,8 +23,8 @@
                 <td>{{ $tag->title }}</td>
                 <td>{{ $tag->slug }}</td>
                 <td>
-                    <a href="form.php?id={{ $tag->id }}">Edit</a> |
-                    <a href="delete.php?id={{ $tag->id }}">Delete</a>
+                    <a href="/tags/form/{{ $tag->id }}">Edit</a> |
+                    <a href="/tags/delete/{{ $tag->id }}">Delete</a>
                 </td>
             </tr>
         @endforeach
